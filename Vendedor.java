@@ -1,5 +1,5 @@
 
-package com.mycompany.proyectoferiaclick;
+package app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -117,7 +117,7 @@ public class Vendedor {
         
         Producto productos=new Producto();
         
-        for (int i = 0 ; i <= productosVender ; i++){
+        for (int i = 0 ; i < productosVender ; i++){
             productos.AgregarProducto();
         }
         
@@ -126,13 +126,14 @@ public class Vendedor {
  
         
         LVendedor.add(feriante);
-        
-        
-        
-        
+      
         
     }
+    
+    
     public void ConsultarVendedor(){ 
+        
+        System.out.println(LVendedor.size());
         
         for(int i=0;i<LVendedor.size();i++){
              
@@ -151,7 +152,7 @@ public class Vendedor {
         Scanner entrada = new Scanner (System.in);
         
         for(int i=0;i<LVendedor.size();i++){
-            if(LVendedor.get(i).getRUT()==rut)
+            if(LVendedor.get(i).getRUT().equals(rut))
                 posicion=i;
            
         }
@@ -198,9 +199,10 @@ public class Vendedor {
     }
     public void EliminarVendedor(String rut){
         for(int i = 0 ; i<LVendedor.size() ; i++){
-            if(LVendedor.get(i).getRUT()==rut){
+            if(LVendedor.get(i).getRUT().equals(rut)){
                 LVendedor.remove(i);
             }
         }
     }
 }
+

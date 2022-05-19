@@ -1,5 +1,5 @@
 
-package com.mycompany.proyectoferiaclick;
+package app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,6 +9,7 @@ public class Feria {
     public ArrayList<Feria> LFeria=new ArrayList<Feria>();
     
     //atributos 
+    private String IDFeria;
     private String NombreFeria;
     private String DireccionFeria;  
     
@@ -22,6 +23,10 @@ public class Feria {
         this.DireccionFeria=DireccionFeria;
     }
     //accesores 
+
+    public Feria(String IDFeria) {
+        this.IDFeria = IDFeria;
+    }
     
     public String getNombreFeria(){
         return NombreFeria;
@@ -42,10 +47,13 @@ public class Feria {
     
     //Comportamientos 
     public void IngresarFeria(){
+        int IDFeria;
         String NFeria;
         String DFeria;
         Scanner Entrada=new Scanner(System.in);
         
+        System.out.println("Ingrese el ID  de la feria ");
+        IDFeria=Entrada.nextInt();
         System.out.println("Ingrese el nombre  de la feria (SIN ESPACIOS)");
         NFeria=Entrada.next();
         System.out.println("Ingrese el direccion de la feria");
@@ -78,7 +86,7 @@ public class Feria {
         Scanner entrada = new Scanner (System.in);
         
         for(int i=0;i<LFeria.size();i++){
-            if(LFeria.get(i).getNombreFeria()==NombreFeria)
+            if(LFeria.get(i).getNombreFeria().equals(NombreFeria))
                 posicion=i;
            
         }
@@ -116,7 +124,7 @@ public class Feria {
     //Metodo que elimina algun objeto dentro de la coleccion de ferias
     public void EliminarFeria(String NombreFeria){
         for(int i = 0 ; i<LFeria.size() ; i++){
-            if(LFeria.get(i).getNombreFeria()==NombreFeria){
+            if(LFeria.get(i).getNombreFeria().equals(NombreFeria)){
                 LFeria.remove(i);
             }
         }

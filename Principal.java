@@ -5,7 +5,7 @@
 
 */
 
-package com.mycompany.proyectoferiaclick;
+package app;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -38,14 +38,15 @@ public class Principal {
             System.out.println("2.  Mostrar productos ");
             System.out.println("3.  Modificar productos ");
             System.out.println("4.  Eliminar productos ");
-            System.out.println("5.  Agregar feriante");
+            System.out.println("5.  Registrar feriante");
             System.out.println("6.  Mostrar feriantes");
             System.out.println("7.  Modificar feriante");
             System.out.println("8.  Eliminar feriante");
-            System.out.println("9.  Agregar feria");
+            System.out.println("9.  Registrar feria");
             System.out.println("10. Mostrar ferias");
             System.out.println("11. Modificar ferias");
             System.out.println("12. Eliminar feria");
+            System.out.println("13. Ingresar como feriante");
 
             opcion = Entrada.nextInt();
 
@@ -82,6 +83,8 @@ public class Principal {
                     
                 case 5: 
                     vendedor.CrearVendedor();
+                    
+                    
                 break;
                     
                 case 6: 
@@ -135,6 +138,16 @@ public class Principal {
                     NombreFeria1= auxFeria1.next();
                     
                     ferias.EliminarFeria(NombreFeria1);
+                break;
+                
+                case 13:
+                    String Rut;
+                    Scanner auxR = new Scanner(System.in);
+                    
+                    System.out.println("Ingrese su rut ");
+                    Rut=auxR.next();
+                    
+                    //vendedor.IngresarVendedor(Rut);
                 break;
             }
         }while(opcion != 0);  
