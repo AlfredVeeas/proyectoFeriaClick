@@ -1,4 +1,4 @@
-package com.mycompany.proyectoferiaclick;
+package app;
 
 import java.text.ParseException;
 import java.util.ArrayList;
