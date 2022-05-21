@@ -15,11 +15,12 @@ import java.util.Scanner;
  * @author evert
  */
 
-public class Principal {
+public class Principal  {
     
     public static Producto productosFeriante= new Producto() ;
     public static Feria ferias = new Feria() ;
     public static Vendedor vendedor = new Vendedor() ;
+    public static Persona personita;
     
        
     public static void main(String [] args) throws ParseException{
@@ -50,8 +51,7 @@ public class Principal {
 
             opcion = Entrada.nextInt();
 
-            
-            
+                       
             switch (opcion){
                 case 1: 
                     productosFeriante.AgregarProducto();
@@ -131,23 +131,45 @@ public class Principal {
                 break;
                     
                 case 12: 
-                    String NombreFeria1;
+                    String NombreFeria1="";
                     Scanner auxFeria1 = new Scanner(System.in);
                     
                     System.out.println("Ingrese nombre de feria a eliminar");
-                    NombreFeria1= auxFeria1.next();
+                    NombreFeria1= auxFeria1.nextLine();
                     
                     ferias.EliminarFeria(NombreFeria1);
                 break;
                 
                 case 13:
-                    String Rut;
-                    Scanner auxR = new Scanner(System.in);
+                    String rut1;
+                    Scanner entrada = new Scanner(System.in);
                     
-                    System.out.println("Ingrese su rut ");
-                    Rut=auxR.next();
+                    System.out.println("Ingrese rut de vendedor");
+                    rut1= entrada.next();                
+                    vendedor.IngresarVendedor(rut1);
+                break;
+                
+                case 14:
+                    String Nombre="";
+                    String Rut="";
+                    String Direccion="";
+                    int dinero;
                     
-                    //vendedor.IngresarVendedor(Rut);
+                    Scanner readCliente = new Scanner(System.in);
+                    
+                    System.out.println("Ingrese su nombre");
+                    Nombre=readCliente.nextLine();
+                    
+                    System.out.println("Ingrese su rut");
+                    rut=readCliente.nextLine();
+                    
+                    System.out.println("Ingrese su direccion");
+                    Direccion=readCliente.nextLine();
+                    
+                    System.out.println("Ingrese cuanto dinero tienes para gastar");
+                    dinero=readCliente.nextInt();
+                    
+                    personita = new Cliente(dinero,Nombre,rut,Direccion);
                 break;
             }
         }while(opcion != 0);  

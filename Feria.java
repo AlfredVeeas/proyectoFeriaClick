@@ -47,17 +47,17 @@ public class Feria {
     
     //Comportamientos 
     public void IngresarFeria(){
-        int IDFeria;
-        String NFeria;
-        String DFeria;
+
+        String NFeria="";
+        String DFeria="";
         Scanner Entrada=new Scanner(System.in);
         
-        System.out.println("Ingrese el ID  de la feria ");
-        IDFeria=Entrada.nextInt();
+
         System.out.println("Ingrese el nombre  de la feria (SIN ESPACIOS)");
-        NFeria=Entrada.next();
+        NFeria=Entrada.nextLine();
         System.out.println("Ingrese el direccion de la feria");
-        DFeria=Entrada.next();
+        DFeria=Entrada.nextLine();
+
         
         Feria ferias = new Feria(NFeria,DFeria);
         LFeria.add(ferias);
@@ -72,12 +72,7 @@ public class Feria {
         }
     }
     
-    //Metodo que muestra los objetos que hay dentro de feria (Por el momento no sera implementada)
-    /**
-      public void ConsultarFeria(int i){
-        
-        }   
-     */
+    
     
     
     //Metodo que modifica algun atributo dentro de feria
@@ -104,7 +99,7 @@ public class Feria {
                 String NuevoNombre;
                 
                 System.out.println("Ingrese un nuevo nombre");
-                NuevoNombre = entrada.next();
+                NuevoNombre = entrada.nextLine();
                 
                 LFeria.get(posicion).setNombreFeria(NuevoNombre);
             break;
@@ -113,7 +108,7 @@ public class Feria {
                 String NuevaDireccion;
                 
                 System.out.println("Ingrese un nuevo tipo");
-                NuevaDireccion = entrada.next();
+                NuevaDireccion = entrada.nextLine();
                 
                 LFeria.get(posicion).setDireccionFeria(NuevaDireccion);
             break;
