@@ -66,21 +66,7 @@ public class Feria {
         feriaGui.ConstuirFormulario();
         
         
-        /*
-        String NFeria="";
-        String DFeria="";
-        Scanner Entrada=new Scanner(System.in);
         
-
-        System.out.println("Ingrese el nombre  de la feria (SIN ESPACIOS)");
-        NFeria=Entrada.nextLine();
-        System.out.println("Ingrese el direccion de la feria");
-        DFeria=Entrada.nextLine();
-
-        
-        Feria ferias = new Feria(NFeria,DFeria);
-        LFeria.add(ferias);
-        */
     }
     
     //Metodo que muestra la lista de ferias disponibles

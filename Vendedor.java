@@ -105,48 +105,7 @@ public class Vendedor implements Compra{
         InterfaceVendedor vendedorGui= new InterfaceVendedor("CrearVendedor");
         vendedorGui.ConstuirFormulario();
         
-        /*Scanner Entrada = new Scanner(System.in);
         
-        System.out.println("Ingreso de vendedor ");
-        
-        
-        System.out.println("Ingrese su nombre");
-        NombreV=Entrada.nextLine();
-        System.out.println("Ingrese su rut");
-        RUT=Entrada.nextLine();
-        System.out.println("Ingrese el nombre de su local");
-        NombreL=Entrada.nextLine();
-        System.out.println("Indique su horario de atencion");
-        HoraAtencion=Entrada.next();
-
-        do{
-            System.out.println("Ingrese su numero de puesto ");
-            Puesto=Entrada.nextInt();
-            if(ValidarNumeroPuesto(Puesto))
-                System.out.println("Puesto ocupado");
-        }while(ValidarNumeroPuesto(Puesto));
-
-        //Ingreso de productos del vendedor
-        
-        if(!ValidarRut(RUT)){
-            System.out.println("¿Cuantos productos vas a ingresar "+NombreV+"?");
-            productosVender=Entrada.nextInt();
-        
-            Producto productos=new Producto();
-        
-            for (int i = 0 ; i < productosVender ; i++){
-                productos.AgregarProducto();
-            }
-        
-            Vendedor feriante = new Vendedor(NombreV,RUT,NombreL,HoraAtencion,Puesto,productos.getLProductos());
-
- 
-        
-        LVendedor.add(feriante);
-        }else
-            System.out.println("RUT YA INGRESADO");
-       
-        */
     }
     
     //Metodo que consulta por el rut de vendedor para poder ingresar nuevos productos
@@ -334,7 +293,7 @@ public class Vendedor implements Compra{
 
     @Override
     public void AgregarFondos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 }
 
