@@ -93,7 +93,7 @@ public class Interfaz extends Frame{
                     
              });
              
-             
+             /*
              submenuR.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent a) {
                        
@@ -119,7 +119,7 @@ public class Interfaz extends Frame{
                     }
                     
              });
-                
+             */   
              submenuCF.addActionListener(new ActionListener(){
                  public void actionPerformed(ActionEvent ingresarFeria){
                      Feria feria = new Feria();
