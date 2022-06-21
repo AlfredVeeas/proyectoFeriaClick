@@ -1,5 +1,5 @@
 
-package com.mycompany.proyectoferiaclick;
+package app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,6 +9,7 @@ public class Feria {
     public ArrayList<Feria> LFeria=new ArrayList<Feria>();
     
     //atributos 
+    private String IDFeria;
     private String NombreFeria;
     private String DireccionFeria;  
     
@@ -21,7 +22,25 @@ public class Feria {
         this.NombreFeria=NombreFeria;
         this.DireccionFeria=DireccionFeria;
     }
-    //accesores 
+
+    public ArrayList<Feria> getLFeria() {
+        return LFeria;
+    }
+
+    public void setLFeria(ArrayList<Feria> LFeria) {
+        this.LFeria = LFeria;
+    }
+
+    public String getIDFeria() {
+        return IDFeria;
+    }
+
+    public void setIDFeria(String IDFeria) {
+        this.IDFeria = IDFeria;
+    }
+
+    
+   
     
     public String getNombreFeria(){
         return NombreFeria;
@@ -30,8 +49,7 @@ public class Feria {
         return DireccionFeria;
     }
     
-    //mutadores 
-    
+   
     public void setNombreFeria(String NombreFeria1){
         NombreFeria=NombreFeria1;
     }
@@ -42,17 +60,27 @@ public class Feria {
     
     //Comportamientos 
     public void IngresarFeria(){
-        String NFeria;
-        String DFeria;
+        
+        
+        InterfaceFeria feriaGui = new InterfaceFeria("Crear feria");
+        feriaGui.ConstuirFormulario();
+        
+        
+        /*
+        String NFeria="";
+        String DFeria="";
         Scanner Entrada=new Scanner(System.in);
         
+
         System.out.println("Ingrese el nombre  de la feria (SIN ESPACIOS)");
-        NFeria=Entrada.next();
+        NFeria=Entrada.nextLine();
         System.out.println("Ingrese el direccion de la feria");
-        DFeria=Entrada.next();
+        DFeria=Entrada.nextLine();
+
         
         Feria ferias = new Feria(NFeria,DFeria);
         LFeria.add(ferias);
+        */
     }
     
     //Metodo que muestra la lista de ferias disponibles
@@ -64,12 +92,7 @@ public class Feria {
         }
     }
     
-    //Metodo que muestra los objetos que hay dentro de feria (Por el momento no sera implementada)
-    /**
-      public void ConsultarFeria(int i){
-        
-        }   
-     */
+    
     
     
     //Metodo que modifica algun atributo dentro de feria
@@ -78,7 +101,7 @@ public class Feria {
         Scanner entrada = new Scanner (System.in);
         
         for(int i=0;i<LFeria.size();i++){
-            if(LFeria.get(i).getNombreFeria()==NombreFeria)
+            if(LFeria.get(i).getNombreFeria().equals(NombreFeria))
                 posicion=i;
            
         }
@@ -96,7 +119,7 @@ public class Feria {
                 String NuevoNombre;
                 
                 System.out.println("Ingrese un nuevo nombre");
-                NuevoNombre = entrada.next();
+                NuevoNombre = entrada.nextLine();
                 
                 LFeria.get(posicion).setNombreFeria(NuevoNombre);
             break;
@@ -105,7 +128,7 @@ public class Feria {
                 String NuevaDireccion;
                 
                 System.out.println("Ingrese un nuevo tipo");
-                NuevaDireccion = entrada.next();
+                NuevaDireccion = entrada.nextLine();
                 
                 LFeria.get(posicion).setDireccionFeria(NuevaDireccion);
             break;
@@ -116,7 +139,7 @@ public class Feria {
     //Metodo que elimina algun objeto dentro de la coleccion de ferias
     public void EliminarFeria(String NombreFeria){
         for(int i = 0 ; i<LFeria.size() ; i++){
-            if(LFeria.get(i).getNombreFeria()==NombreFeria){
+            if(LFeria.get(i).getNombreFeria().equals(NombreFeria)){
                 LFeria.remove(i);
             }
         }

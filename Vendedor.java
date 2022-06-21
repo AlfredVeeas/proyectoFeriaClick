@@ -1,10 +1,10 @@
 
-package com.mycompany.proyectoferiaclick;
+package app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Vendedor {
+public class Vendedor implements Compra{
         
     //atributos
     private int Puesto;
@@ -19,6 +19,10 @@ public class Vendedor {
     
     public Vendedor (){
         
+    }
+    
+    public Vendedor(ArrayList<Producto>  productos){
+        this.LProductos=productos;
     }
     
     public Vendedor(String NombreV,String Rut, String NombreL,String HoraAtencion,int Puesto,ArrayList<Producto>  productos){
@@ -87,56 +91,97 @@ public class Vendedor {
     }
     
     
+    
+    
     //Comportamientos
     public void CrearVendedor(){ //registro de un nuevo vendedor
         int Puesto;
-        String NombreV;
-        String RUT;
-        String NombreL;
-        String HoraAtencion;
+        String NombreV="";
+        String RUT="";
+        String NombreL="";
+        String HoraAtencion="";
         int productosVender;
-       
-        Scanner Entrada = new Scanner(System.in);
+        
+        InterfaceVendedor vendedorGui= new InterfaceVendedor("CrearVendedor");
+        vendedorGui.ConstuirFormulario();
+        
+        /*Scanner Entrada = new Scanner(System.in);
         
         System.out.println("Ingreso de vendedor ");
         
-        System.out.println("Ingrese su numero de puesto ");
-        Puesto=Entrada.nextInt();
+        
         System.out.println("Ingrese su nombre");
-        NombreV=Entrada.next();
+        NombreV=Entrada.nextLine();
         System.out.println("Ingrese su rut");
-        RUT=Entrada.next();
+        RUT=Entrada.nextLine();
         System.out.println("Ingrese el nombre de su local");
-        NombreL=Entrada.next();
+        NombreL=Entrada.nextLine();
         System.out.println("Indique su horario de atencion");
         HoraAtencion=Entrada.next();
+
+        do{
+            System.out.println("Ingrese su numero de puesto ");
+            Puesto=Entrada.nextInt();
+            if(ValidarNumeroPuesto(Puesto))
+                System.out.println("Puesto ocupado");
+        }while(ValidarNumeroPuesto(Puesto));
+
         //Ingreso de productos del vendedor
         
-        System.out.println("¿Cuantos productos vas a ingresar "+NombreV+"?");
-        productosVender=Entrada.nextInt();
+        if(!ValidarRut(RUT)){
+            System.out.println("¿Cuantos productos vas a ingresar "+NombreV+"?");
+            productosVender=Entrada.nextInt();
         
-        Producto productos=new Producto();
+            Producto productos=new Producto();
         
-        for (int i = 0 ; i <= productosVender ; i++){
-            productos.AgregarProducto();
-        }
+            for (int i = 0 ; i < productosVender ; i++){
+                productos.AgregarProducto();
+            }
         
-        Vendedor feriante = new Vendedor(NombreV,RUT,NombreL,HoraAtencion,Puesto,productos.getLProductos());
+            Vendedor feriante = new Vendedor(NombreV,RUT,NombreL,HoraAtencion,Puesto,productos.getLProductos());
 
  
         
         LVendedor.add(feriante);
-        
-        
-        
-        
-        
+        }else
+            System.out.println("RUT YA INGRESADO");
+       
+        */
     }
+    
+    //Metodo que consulta por el rut de vendedor para poder ingresar nuevos productos
+    public void IngresarVendedor(String RUT){
+        int productosVender;
+        
+        Scanner Entrada = new Scanner(System.in);
+        
+        if(!(ValidarRut(RUT))){
+            System.out.println("Rut no encontrado");
+        }else{
+            System.out.println("Bienvenido "+LVendedor.get(EncontrarVendedor(RUT)).getNombreV());
+            
+            System.out.println("¿Cuantos productos vas a ingresar "+LVendedor.get(EncontrarVendedor(RUT)).getNombreV()+"?");
+            productosVender=Entrada.nextInt();
+        
+            Producto productos=new Producto();
+        
+            for (int i = 0 ; i < productosVender ; i++){
+                productos.AgregarProducto();
+            }
+            
+            LVendedor.get(EncontrarVendedor(RUT)).LProductos.add(productos);
+        }
+    }
+    
+    
     public void ConsultarVendedor(){ 
+        
+        System.out.println(LVendedor.size());
         
         for(int i=0;i<LVendedor.size();i++){
              
-             System.out.println("<<< ***************Puesto No "+LVendedor.get(i).getPuesto()+ " ***********************>>>");
+             System.out.println("<<< ***************Puesto: "+LVendedor.get(i).getNombreL() +" ***********************>>>");
+             System.out.println("<<< ***************Horario de atencion: "+LVendedor.get(i).getHoraAtencion() +" ***********************>>>");
              System.out.println("<<< ************ Productos disponibles *********************** >>>");
              System.out.println("<<< Nombre----------------Stock----------------Precio >>>>");
              for(int j=0;j<LVendedor.get(i).LProductos.size();j++){
@@ -146,17 +191,19 @@ public class Vendedor {
              System.out.println("");
        }
     }
+    
+    
     public void ActualizarVendedor(String rut){
         int opcion, posicion = -1;
         Scanner entrada = new Scanner (System.in);
         
         for(int i=0;i<LVendedor.size();i++){
-            if(LVendedor.get(i).getRUT()==rut)
+            if(LVendedor.get(i).getRUT().equals(rut))
                 posicion=i;
            
         }
         
-        System.out.println("Elemento encontrado en: "+posicion);
+        System.out.println("Elemento encontrado en: "+(posicion + 1));
         System.out.println("Que va a querer modificar del vendedor");
         System.out.println("1. Nombre.  2. NumPuesto.  3.Hora de atencion. ");
         System.out.println();
@@ -166,10 +213,10 @@ public class Vendedor {
         
         switch(opcion){
             case 1:
-                String NuevoNombre;
+                String NuevoNombre="";
                 
                 System.out.println("Ingrese un nuevo nombre");
-                NuevoNombre = entrada.next();
+                NuevoNombre = entrada.nextLine();
                 
                 LVendedor.get(posicion).setNombreV(NuevoNombre);
             break;
@@ -177,17 +224,17 @@ public class Vendedor {
             case 2:
                 int NuevoNum;
                 
-                System.out.println("Ingrese un nuevo tipo");
+                System.out.println("Ingrese un nuevo numero de puesto");
                 NuevoNum = entrada.nextInt();
                 
                 LVendedor.get(posicion).setPuesto(NuevoNum);
             break;
             
             case 3:
-                String NuevoHorario;
+                String NuevoHorario="";
                 
-                System.out.println("Ingrese un nuevo stock");
-                NuevoHorario = entrada.next();
+                System.out.println("Ingrese un nuevo horario");
+                NuevoHorario = entrada.nextLine();
                 
                 LVendedor.get(posicion).setHoraAtencion(NuevoHorario);
             break;
@@ -198,9 +245,96 @@ public class Vendedor {
     }
     public void EliminarVendedor(String rut){
         for(int i = 0 ; i<LVendedor.size() ; i++){
-            if(LVendedor.get(i).getRUT()==rut){
+            if(LVendedor.get(i).getRUT().equals(rut)){
                 LVendedor.remove(i);
             }
         }
     }
+    
+    //metodo que valida por rut de vendedor si esta en sistema
+    public boolean ValidarRut(String rut){
+        for(int i = 0 ; i<LVendedor.size() ; i++){
+            if(LVendedor.get(i).getRUT().equals(rut)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    //busca un vendedor por rut y retorna la posicion que se encuentra en el sistema
+    public int EncontrarVendedor(String rut){
+        for(int i = 0 ; i<LVendedor.size() ; i++){
+            if(LVendedor.get(i).getRUT().equals(rut)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    //valida que un puesto no se encuentre repetido 
+    public boolean ValidarNumeroPuesto(int N){
+        for(int i = 0 ; i<LVendedor.size() ; i++){
+            if(LVendedor.get(i).getPuesto()==N){
+                return true;
+            }
+        }
+        return false;
+    }
+ 
+    public boolean ValidarProducto(String Producto){
+        for(int i = 0 ; i<LVendedor.size() ; i++){
+            for(int j = 0 ; i<LVendedor.get(i).LProductos.size() ; i++){
+                if(LVendedor.get(i).LProductos.get(j).getNombre().equals(Producto))
+                   return true; 
+            }
+                           
+        }
+        return false;
+    }
+    
+    public int [] BuscarVendedor(String Producto){
+        int [] posiciones = new int [2];
+        
+        for(int i = 0 ; i<LVendedor.size() ; i++){
+            for(int j = 0 ; i<LVendedor.get(i).LProductos.size() ; i++){
+                if(LVendedor.get(i).LProductos.get(j).getNombre().equals(Producto))
+                   posiciones[0]=i;
+                   posiciones[1]=j;
+            }
+                           
+        }
+        return posiciones ;
+    }
+    
+    //busca el primer vendedor que tiene cierto producto dentro del sistema 
+    //de vendedor, y descuenta del stock
+    public void SacarStock(String Producto,int Cant){
+       int [] posVendedor=BuscarVendedor(Producto);
+       
+       LVendedor.get(posVendedor[0]).LProductos.get(posVendedor[1]).setStock(LProductos.get(posVendedor[1]).getStock()-Cant);
+       
+    }
+    
+    @Override 
+    public void ComprarProducto(){
+        String ProductoComprar="";
+        int CantCompra;
+        Scanner Entrada = new Scanner(System.in);
+        
+        System.out.println("¿Que productos deseas comprar?" +getNombreV());
+        ProductoComprar = Entrada.nextLine();
+        
+        if(ValidarProducto(ProductoComprar)){
+            System.out.println("¿Cuantos productos deseas comprar?" +getNombreV());
+            CantCompra=Entrada.nextInt();
+            SacarStock(ProductoComprar,CantCompra);
+        } else
+            System.out.println("Producto no encontrado");
+    }
+
+    @Override
+    public void AgregarFondos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
+
